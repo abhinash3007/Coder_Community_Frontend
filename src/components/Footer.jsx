@@ -2,15 +2,9 @@ import React from "react";
 
 const Footer = () => {
   return (
-      <footer className="footer sm:footer-horizontal footer-center bg-base-300 text-base-content rounded p-10 fixed bottom-0">
-        <nav className="grid grid-flow-col gap-4">
-          <a className="link link-hover">About us</a>
-          <a className="link link-hover">Contact</a>
-          <a className="link link-hover">Jobs</a>
-          <a className="link link-hover">Press kit</a>
-        </nav>
-        <nav>
-          <div className="grid grid-flow-col gap-4">
+      <footer className="footer sm:footer-horizontal footer-center bg-base-300 text-base-content rounded p-5 fixed bottom-0">
+               <nav>
+          <div className="grid grid-flow-col">
             <a>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
