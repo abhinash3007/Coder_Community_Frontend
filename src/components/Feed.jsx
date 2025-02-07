@@ -21,7 +21,7 @@ const Feed = () => {
   useEffect(() => {
     getFeed();
   }, []);
-  console.log("Feed state:", feed);
+  // console.log("Feed state:", feed);
 
   return (
     feed && (

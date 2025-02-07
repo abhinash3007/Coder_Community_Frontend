@@ -16,7 +16,7 @@ const Login = () => {
         email,
         password
        },{withCredentials:true});
-       console.log("API Response:", res.data);
+      //  console.log("API Response:", res.data);
        dispatch(addUser(res.data));
        return navigate("/");
     }catch(err){

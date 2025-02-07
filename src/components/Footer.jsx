@@ -2,8 +2,12 @@ import React from "react";
 
 const Footer = () => {
   return (
-      <footer className="footer sm:footer-horizontal footer-center bg-base-300 text-base-content rounded p-5 fixed bottom-0">
-               <nav>
+    <div className=" flex flex-col justify-between">
+      <div className="flex-1 overflow-y-auto">
+        {/* Your content here */}
+      </div>
+      <footer className="bg-base-300 text-base-content rounded p-5">
+        <nav>
           <div className="grid grid-flow-col">
             <a>
               <svg
@@ -42,11 +46,12 @@ const Footer = () => {
         </nav>
         <aside>
           <p>
-            Copyright © {new Date().getFullYear()} - All right reserved by ACME
+            Copyright {new Date().getFullYear()} - All right reserved by ACME
             Industries Ltd
           </p>
         </aside>
       </footer>
+    </div>
   );
 };
 
