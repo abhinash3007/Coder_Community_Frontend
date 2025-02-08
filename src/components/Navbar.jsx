@@ -6,7 +6,7 @@ import { BASE_URL } from "../utils/constants";
 import { removeUser } from "../utils/userSlice";
 
 const Navbar = () => {
-  const user = useSelector((store) => store.user.currentUser);
+  const user = useSelector((store) => store.user);
   const dispatch=useDispatch();
   const navigate=useNavigate();
   const handleLogout=async()=>{
@@ -44,16 +44,18 @@ const Navbar = () => {
             </div>
             <ul
               tabIndex={0}
-              class="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow"
+              className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-15 w-52 p-2 shadow"
             >
               <li>
                 <Link to="/profile" className="justify-between">
                   Profile
-                  <span className="badge">New</span>
                 </Link>
               </li>
               <li>
                 <Link to="/connections" ><a>Connections</a></Link>
+              </li>
+              <li>
+                <Link to="/requests" ><a>Requests</a></Link>
               </li>
               <li>
                 <a onClick={handleLogout}>Logout</a>

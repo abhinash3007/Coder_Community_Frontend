@@ -1,12 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import UserCard from "./UserCard";
 import axios from "axios";
 import { BASE_URL } from "../utils/constants";
 import { useDispatch } from "react-redux";
 import { addUser } from "../utils/userSlice";
 
-const EditProfile = ({ user }) => {
-  //   console.log(user);
+const EditProfile = ({ user, myProfile }) => {
   const [firstName, setFirstName] = useState(user.firstName);
   const [lastName, setLastName] = useState(user.lastName);
   const [age, setAge] = useState(user.age);
@@ -33,8 +32,7 @@ const EditProfile = ({ user }) => {
           withCredentials: true,
         }
       );
-      console.log("Updated user data:", response.data);
-      dispatch(addUser(response.data));
+      dispatch(addUser(response.data.data));
       setShowToast(true);
       setTimeout(()=>{
         setShowToast(false);
@@ -122,7 +120,7 @@ const EditProfile = ({ user }) => {
           </div>
         </div>
         <UserCard
-          user={{ firstName, lastName, age, gender, photoUrl, about }}
+          user={{ firstName, lastName, age, gender, photoUrl, about }} myProfile={myProfile}
         />
       </div>
       {showToast && (<div className="toast toast-top toast-center">

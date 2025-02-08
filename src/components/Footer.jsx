@@ -2,9 +2,8 @@ import React from "react";
 
 const Footer = () => {
   return (
-    <div className=" flex flex-col justify-between">
+    <div className=" flex flex-col justify-between min-h-screen ">
       <div className="flex-1 overflow-y-auto">
-        {/* Your content here */}
       </div>
       <footer className="bg-base-300 text-base-content rounded p-5">
         <nav>
