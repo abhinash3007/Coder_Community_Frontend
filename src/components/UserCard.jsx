@@ -13,7 +13,8 @@ const UserCard = ({ user, myProfile  }) => {
       await axios.post(`${BASE_URL}/request/send/${status}/${_id}`, {}, { withCredentials: true });
       dispatch(removeFeed(_id));
     }catch(err){
-      console.log(err);
+      console.error("Error sending request:", err.response?.data || err.message);
+
     }
   }
   //console.log(user);
