@@ -22,7 +22,7 @@ const Requests = () => {
       const res = await axios.get(`${BASE_URL}/user/request/recieved`, {
         withCredentials: true,
       });
-      dispatch(addRequest(res.data.connection)); // ✅ Ensure `connection` is an array
+      dispatch(addRequest(res.data.connection)); 
     } catch (err) {
       console.log(err.message);
     }
