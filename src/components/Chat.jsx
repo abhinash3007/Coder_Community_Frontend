@@ -7,19 +7,18 @@ import { BASE_URL } from "../utils/constants";
 
 const Chat = () => {
   const params = useParams();
-  console.log("Params:", params)
   const { targetUserId } = useParams();
-  console.log("Extracted targetUserId:", targetUserId); // ✅ Check if it's undefined
+  //console.log("Extracted targetUserId:", targetUserId); // ✅ Check if it's undefined
 
   const [messages, setMessages] = useState([]);
   const [newMessages, setNewMessages] = useState("");
-  console.log(targetUserId);
+  //console.log(targetUserId);
   const user = useSelector((store) => store.user);
   const userId=user?._id;
 
   const fetchMessage=async()=>{
     const chat=await axios.get(BASE_URL+ "/chat/"+targetUserId,{withCredentials:true});
-    console.log(chat.data);
+    //console.log(chat.data);
 
     const chatMessage=chat?.data?.message.map((msg)=>{
       const {senderId,text}=msg;
@@ -43,7 +42,7 @@ const Chat = () => {
     const socket=createSocketConnection();
     socket.emit("joinChat",{firstName:user.firstName, userId,targetUserId});
     socket.on("messageRecieved",({firstName ,lastName, text})=>{
-        console.log(firstName+" : " +text);
+        //console.log(firstName+" : " +text);
         setMessages((messages)=>[...messages,{firstName,lastName,text}]);
     })
     return ()=>{
