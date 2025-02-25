@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import { createSocketConnection } from "../utils/socket";
 import { useSelector } from "react-redux";
+import axios from "axios";
+import { BASE_URL } from "../utils/constants";
 
 const Chat = () => {
   const params = useParams();
@@ -14,6 +16,25 @@ const Chat = () => {
   console.log(targetUserId);
   const user = useSelector((store) => store.user);
   const userId=user?._id;
+
+  const fetchMessage=async()=>{
+    const chat=await axios.get(BASE_URL+ "/chat/"+targetUserId,{withCredentials:true});
+    console.log(chat.data);
+
+    const chatMessage=chat?.data?.message.map((msg)=>{
+      const {senderId,text}=msg;
+      return {
+        firstName: senderId?.firstName,
+        lastName: senderId?.lastName,
+        text:text
+      }
+    })
+    setMessages(chatMessage)
+  };
+
+  useEffect(()=>{
+    fetchMessage();
+  },[]);
   useEffect(()=>{
     if (!userId || !targetUserId) {
         console.log("Error: Missing userId or targetUserId");
@@ -21,9 +42,9 @@ const Chat = () => {
     }
     const socket=createSocketConnection();
     socket.emit("joinChat",{firstName:user.firstName, userId,targetUserId});
-    socket.on("messageRecieved",({firstName , text})=>{
+    socket.on("messageRecieved",({firstName ,lastName, text})=>{
         console.log(firstName+" : " +text);
-        setMessages((messages)=>[...messages,{firstName,text}]);
+        setMessages((messages)=>[...messages,{firstName,lastName,text}]);
     })
     return ()=>{
         socket.disconnect();
@@ -32,19 +53,22 @@ const Chat = () => {
   const sendMessage=()=>{
     const socket=createSocketConnection();
     socket.emit("sendMessage",{
-        firstName:user.firstName, userId,targetUserId ,text: newMessages
+        firstName:user.firstName, lastName:user.lastName, userId,targetUserId ,text: newMessages
     });
     setNewMessages("");
   }
   return (
     <div className="w-3/4 mx-auto border border-gray-600 m-5 h-[70vh] flex flex-col">
       <h1 className="p-5 border-b border-gray-600">Chat</h1>
-      <div className="flex-1 overflow-scroll p-5">
+      <div className="flex-1 overflow-y-auto p-5">
         {messages.map((msg, index) => {
           return (
-            <div key={index} className="chat chat-start">
+            <div key={index} className={
+              "chat " +
+              (user.firstName === msg.firstName ? "chat-end" : "chat-start")
+            }>
               <div className="chat-header">
-                {msg.firstName}
+                {msg.firstName+" "+msg.lastName}
                 <time className="text-xs opacity-50">2 hours ago</time>
               </div>
               <div className="chat-bubble">{msg.text}</div>
