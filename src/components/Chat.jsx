@@ -26,7 +26,8 @@ const Chat = () => {
       return {
         firstName: senderId?.firstName,
         lastName: senderId?.lastName,
-        text:text
+        text:text,
+        time: createdAt || new Date().toISOString(),
       }
     })
     setMessages(chatMessage)
@@ -53,7 +54,7 @@ const Chat = () => {
   const sendMessage=()=>{
     const socket=createSocketConnection();
     socket.emit("sendMessage",{
-        firstName:user.firstName, lastName:user.lastName, userId,targetUserId ,text: newMessages
+        firstName:user.firstName, lastName:user.lastName, userId,targetUserId ,text: newMessages,   time: new Date().toISOString(),
     });
     setNewMessages("");
   }
@@ -69,7 +70,7 @@ const Chat = () => {
             }>
               <div className="chat-header">
                 {msg.firstName+" "+msg.lastName}
-                <time className="text-xs opacity-50">{moment(msg.time).format("hh:mm A")}</time>
+                <time className="text-xs opacity-50">{msg.time ? new Date(msg.time).toLocaleTimeString() : "Just now"} </time>
               </div>
               <div className="chat-bubble">{msg.text}</div>
               <div className="chat-footer opacity-50">Seen</div>
