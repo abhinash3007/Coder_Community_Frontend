@@ -9,12 +9,13 @@ import Feed from "./components/Feed";
 import Connections from "./components/Connections";
 import Requests from "./components/Requests";
 import TermsOfService from "./components/TermsOfService";
-// import PrivacyPolicy from "./components/PrivacyPolicy";
+ import PrivacyPolicy from "./components/PrivacyPolicy";
 import RefundPolicy from "./components/RefundPolicy";
 import CancellationPolicy from "./components/CancellationPolicy";
 import ShippingPolicy from "./components/ShippingPolicy";
 import Contact from "./components/Contact";
 import Chat from "./components/Chat";
+import AboutUs from "./components/AboutUs";
 
 const App = () => {
   return (
@@ -27,14 +28,19 @@ const App = () => {
             <Route path="connections" element={<Connections />} />
             <Route path="requests" element={<Requests />} />
             <Route path="/chat/:targetUserId" element={<Chat />} />
+            
+            <Route path="/terms-of-service" element={<TermsOfService />} />
+            <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+            <Route path="/refund-policy" element={<RefundPolicy />} />
+            <Route
+              path="/cancellation-policy"
+              element={<CancellationPolicy />}
+            />
+            <Route path="/shipping-policy" element={<ShippingPolicy />} />
+            <Route path="/contact" element={<Contact />} />
+            <Route path="/about" element={<AboutUs />} />
           </Route>
           <Route path="/login" element={<Login />} />
-          <Route path="/terms-of-service" element={<TermsOfService />} />
-          {/* <Route path="/privacy-policy" element={<PrivacyPolicy />} /> */}
-          <Route path="/refund-policy" element={<RefundPolicy />} />
-          <Route path="/cancellation-policy" element={<CancellationPolicy />} />
-          <Route path="/shipping-policy" element={<ShippingPolicy />} />
-          <Route path="/contact" element={<Contact />} />
         </Routes>
       </BrowserRouter>
     </Provider>
